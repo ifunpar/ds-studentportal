@@ -1,0 +1,17 @@
+{
+    "name": "chez14/ds-sso",
+    "description": "Stupor DSSO",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris",
+            "email": "iam@christianto.net"
+        }
+    ],
+    "minimum-stability": "beta",
+    "require": {
+        "chez14/desso": "^0.1.0",
+        "guzzlehttp/guzzle": "^6.3"
+    }
+}
