@@ -1,6 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 use Chez14\Desso;
+use Chez14\Desso\Services;
 
 /**
  * @testdox Basic Test

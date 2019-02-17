@@ -132,27 +132,33 @@ class StudentPortal extends ServiceBase {
 
 
     public function pre_login(){
-        $this->client->request('GET', "/");
-        $this->client->request('GET', self::IGNITE_URL);
+        $this->guzzleClient->request('GET', "/");
+        $this->guzzleClient->request('GET', self::IGNITE_URL);
 
         return;
     }
 
-    public function post_login($ticket) {
-        $resp = $this->client->request('GET',self::IGNITE_URL, [
+    public function post_login(String $ticket) {
+        $resp = $this->guzzleClient->request('GET',self::IGNITE_URL, [
             'query'=>[
                 'ticket'=>$ticket
             ]
         ]);
+
+        return $this->validateLogin();
     }
 
-    public function get_service():String {
+    public function get_service() : String {
         return self::BASE_URL . self::IGNITE_URL;
     }
 
-    public function validateLogin() {
-        $this->client->request('GET', "/home", [], ["allow_redirects"=>false]);
-        return !($resp->getHeader("Location")[0]==self::BASE_URL);
+    /**
+     * Confirming that login is successfull.
+     */
+    public function validateLogin() : bool {
+        $resp = $this->guzzleClient->request('GET', "/home", [], ["allow_redirects"=>false]);
+
+        return $resp->getHeader("Location")==null;
     }
 
     /**
