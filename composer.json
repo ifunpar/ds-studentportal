@@ -13,5 +13,14 @@
     "require": {
         "chez14/desso": "^0.1.0",
         "guzzlehttp/guzzle": "^6.3"
+    },
+    "scripts": {
+        "test-dry" : "phpunit --testdox",
+        "test":"composer require phpunit/phpunit && phpunit --testdox"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chez14\\Desso\\Services\\": "src/"
+        }
     }
 }
