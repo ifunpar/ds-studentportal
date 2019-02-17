@@ -10,6 +10,7 @@ class BasicTest extends TestCase
 {
     protected $client;
     protected $stupor;
+    protected $cacheFolder;
     
     protected function setUp() {
         $client = new Desso\Client();
@@ -24,6 +25,12 @@ class BasicTest extends TestCase
             throw new \InvalidArgumentException('Wrong credential!');
         }
 
+        if(!is_dir(__DIR__ . "/../cache/")){
+            mkdir(__DIR__ . "/../cache/");
+        }
+
+        $this->cacheFolder = realpath(__DIR__ . "/../cache/");
+
         $this->client = $client;
     }
 
@@ -35,5 +42,7 @@ class BasicTest extends TestCase
         $client = $this->client;
 
         $this->assertTrue($client->serviceLogin($stupor));
+
+        $stupor->cookieJarSave($this->cacheFolder . "/sesi.cookie");
     }
 }
