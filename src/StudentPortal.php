@@ -152,7 +152,7 @@ class StudentPortal extends ServiceBase {
 
     public function validateLogin() {
         $this->client->request('GET', "/home", [], ["allow_redirects"=>false]);
-        
+        return !($resp->getHeader("Location")[0]==self::BASE_URL);
     }
 
     /**
