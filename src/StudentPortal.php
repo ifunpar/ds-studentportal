@@ -167,4 +167,11 @@ class StudentPortal extends ServiceBase {
         $profiler = new Data\Jadwal($this->guzzleClient, null);
         return $profiler;
     }
+
+    public function getNilai() {
+        $profiler = new Data\Nilai($this->guzzleClient, [
+            "tempFolder" => $this->tempFolder
+        ]);
+        return $profiler;
+    }
 }

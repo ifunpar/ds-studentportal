@@ -47,4 +47,18 @@ class FetchProfileTest extends TestCase
             $this->assertNotNull($jadwal->getUTSes());
         }
     }
+
+    /**
+     * @testdox Fetch and Parse Nilai
+     */
+    public function testGetNilais() {
+        $stupor = $this->stupor;
+        $jadwal = $stupor->getNilai();
+        $this->assertNotNull($jadwal->getNilais());
+        
+        $semesters = null;
+        $this->assertNotNull($semesters = $jadwal->getSemesters());
+        
+        $this->assertNotNull($jadwal->getNilais($semesters[0]));
+    }
 }
