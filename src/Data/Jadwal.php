@@ -36,8 +36,6 @@ class Jadwal {
     public function __construct($guzzle, $config) {
         $this->guzzleClient = $guzzle;
         $this->config = $config;
-
-        $this->fetch();
     }
 
     public function getJadwals($refetch = false) {
@@ -45,12 +43,12 @@ class Jadwal {
             return $fetched_data;
         }
 
-        if($this->fetched_html == null || $refetch) {
-            $this->fetch();
+        if($this->fetched_html['/jadwal'] == null || $refetch) {
+            $this->fetch('/jadwal');
         }
 
         $matched_jadwals = [];
-        preg_match_all($this->data_jadwals, $this->fetched_html, $matched_jadwals);
+        preg_match_all($this->data_jadwals, $this->fetched_html['/jadwal'], $matched_jadwals);
         
         // var_dump($matched_jadwals);
 
@@ -80,15 +78,13 @@ class Jadwal {
 
     
 
-    protected function fetch() {
+    protected function fetch($endpoint) {
         
-        $resp = $this->guzzleClient->request('GET', '/jadwal', [], [
+        $resp = $this->guzzleClient->request('GET', $endpoint, [], [
             "allow_redirects"=>false
         ]);
 
-        // echo($resp->getBody());
-
-        $this->fetched_html = $resp->getBody();
+        $this->fetched_html[$endpoint] = $resp->getBody();
     }
 
 }
