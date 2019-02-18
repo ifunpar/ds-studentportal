@@ -29,8 +29,22 @@ class FetchProfileTest extends TestCase
     /**
      * @testdox Fetch and Parse Profile
      */
-    public function testFirstStage() {
+    public function testGetProfiles() {
         $stupor = $this->stupor;
-        echo $stupor->getProfile()->getProfilePict_base64();
+        $jadwal = $stupor->getProfile();
+        $this->assertNotNull($jadwal->getDatas());
+        $this->assertNotNull($jadwal->getProfilePict_base64());
+    }
+
+    /**
+     * @testdox Fetch and Parse Jadwal
+     */
+    public function testGetJadwals() {
+        $stupor = $this->stupor;
+        $jadwal = $stupor->getJadwal();
+        $this->assertNotNull($jadwal->getJadwals());
+        if($jadwal->getUASes()) {
+            $this->assertNotNull($jadwal->getUTSes());
+        }
     }
 }

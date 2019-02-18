@@ -32,6 +32,10 @@ class BasicTest extends TestCase
         $this->cacheFolder = realpath(__DIR__ . "/../cache/");
 
         $this->client = $client;
+
+        if(is_file($this->cacheFolder . "/seso.cookie")) {
+            unlink($this->cacheFolder . "/seso.cookie");
+        }
     }
 
     /**

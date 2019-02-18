@@ -92,7 +92,7 @@ class Profile {
 
     public function getProfilePict_base64($refetch = false) {
         if($this->fetched_data && !$refetch) {
-            return $fetched_data;
+            return $this->fetched_data;
         }
 
         if($this->fetched_html == null || $refetch) {

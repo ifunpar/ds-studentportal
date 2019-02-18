@@ -38,8 +38,8 @@ class Jadwal {
         ];
 
     private
-        $fetched_data,
-        $fetched_html;
+        $fetched_data = null,
+        $fetched_html = [];
     
      /**
       * NOT FOR PUBLIC, PLEASE STAND BACK!
@@ -54,7 +54,9 @@ class Jadwal {
             return $fetched_data;
         }
 
-        if($this->fetched_html['/jadwal'] == null || $refetch) {
+        if(!array_key_exists('/jadwal', $this->fetched_html) || 
+            $this->fetched_html['/jadwal'] == null || 
+            $refetch) {
             $this->fetch('/jadwal');
         }
 
@@ -93,7 +95,9 @@ class Jadwal {
             return $fetched_data;
         }
 
-        if($this->fetched_html['/jadwal/ujian_tengah_semester'] == null || $refetch) {
+        if(!array_key_exists('/jadwal/ujian_tengah_semester', $this->fetched_html) || 
+            $this->fetched_html['/jadwal/ujian_tengah_semester'] == null || 
+            $refetch) {
             $this->fetch('/jadwal/ujian_tengah_semester');
         }
 
@@ -128,7 +132,9 @@ class Jadwal {
             return $fetched_data;
         }
 
-        if($this->fetched_html['/jadwal/ujian_akhir_semester'] == null || $refetch) {
+        if(!array_key_exists('/jadwal/ujian_akhir_semester', $this->fetched_html) || 
+            $this->fetched_html['/jadwal/ujian_akhir_semester'] == null || 
+            $refetch) {
             $this->fetch('/jadwal/ujian_akhir_semester');
         }
 
