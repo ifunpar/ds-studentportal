@@ -31,6 +31,6 @@ class FetchProfileTest extends TestCase
      */
     public function testFirstStage() {
         $stupor = $this->stupor;
-        $stupor->getProfile();
+        echo $stupor->getProfile()->getProfilePict_base64();
     }
 }
