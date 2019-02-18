@@ -106,8 +106,41 @@ class Jadwal {
         $matched_jadwals = array_map(function($data) {
             $datax = [];
             \preg_match_all($this->data_tr, $data, $datax);
-            if(!$datax[1])
-                return null;
+
+            $kambing = [];
+            for($i=0; $i<count($this->datas_uts); $i++){
+                $kambing[$this->datas_uts[$i]] = $datax[1][$i];
+            }
+
+            $jam = explode("-", $kambing['exam_time']);
+            $kambing['exam_time'] = [
+                "start" => $jam[0],
+                "end" => $jam[1]
+            ];
+            return $kambing;
+        }, $matched_jadwals[1]);
+
+        return $matched_jadwals;
+    }
+
+    public function getUASes($refetch = false) {
+        if($this->fetched_data && !$refetch) {
+            return $fetched_data;
+        }
+
+        if($this->fetched_html['/jadwal/ujian_akhir_semester'] == null || $refetch) {
+            $this->fetch('/jadwal/ujian_akhir_semester');
+        }
+
+        $tbody = [];
+        preg_match_all("/<tbody.*>(.*)<\/tbody>/sU", $this->fetched_html['/jadwal/ujian_akhir_semester'], $tbody);
+
+        $matched_jadwals = [];
+        preg_match_all($this->data_jadwals, $tbody[1][0], $matched_jadwals);
+
+        $matched_jadwals = array_map(function($data) {
+            $datax = [];
+            \preg_match_all($this->data_tr, $data, $datax);
 
             $kambing = [];
             for($i=0; $i<count($this->datas_uts); $i++){
