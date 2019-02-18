@@ -12,7 +12,8 @@
     "minimum-stability": "beta",
     "require": {
         "chez14/desso": "^0.1.0",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "monolog/monolog": "^2.0@beta"
     },
     "scripts": {
         "test-dry" : "phpunit --testdox",
@@ -22,5 +23,8 @@
         "psr-4": {
             "Chez14\\Desso\\Services\\": "src/"
         }
+    },
+    "require-dev": {
+        "namshi/cuzzle": "^2.0"
     }
 }

@@ -44,13 +44,7 @@ class StudentPortal extends ServiceBase {
 
         $this->guzzleSetting = [
             'base_uri' => self::BASE_URL,
-            'allow_redirects' => [
-                'max'             => 5,
-                'strict'          => false,
-                'referer'         => true,
-                'protocols'       => ['https'],
-                'track_redirects' => false
-            ],
+            'allow_redirects' => false,
             'headers' => [
                 'User-Agent' => Client::$user_agent
             ],
@@ -62,7 +56,7 @@ class StudentPortal extends ServiceBase {
          * Guzzle
          */
         if(key_exists("guzzle", $params)) {
-            $this->guzzleSetting = array_merge($this->guzzleSetting, $params);
+            $this->guzzleSetting = array_merge($this->guzzleSetting, $params['guzzle']);
         }
         $this->refreshGuzzle();
     }
@@ -72,7 +66,7 @@ class StudentPortal extends ServiceBase {
      * Loads cookie Jar/Create them new.
      */
     public function cookieJarUse($cookiejar, $resetGuzzle=true) {
-        $this->cookieFile = $cookieJar;
+        $this->cookieFile = $cookiejar;
         $this->useTempCookie = false;
 
         $this->cookieJar = new \GuzzleHttp\Cookie\FileCookieJar($cookiejar, true);
@@ -106,7 +100,7 @@ class StudentPortal extends ServiceBase {
         $tmpfname = tempnam($this->tempFolder, "cookie");
         $this->useTempCookie = true;
         $this->cookieFile = $tmpfname;
-        $this->cookieJar = new \GuzzleHttp\Cookie\FileCookieJar($tmpfname, true);
+        $this->cookieJar = new \GuzzleHttp\Cookie\FileCookieJar($tmpfname);
 
         if($resetGuzzle) {
             $this->refreshGuzzle();
@@ -132,20 +126,22 @@ class StudentPortal extends ServiceBase {
 
 
     public function pre_login(){
-        $this->guzzleClient->request('GET', "/");
+        $resp = $this->guzzleClient->request('GET', "/");
         $this->guzzleClient->request('GET', self::IGNITE_URL);
-
         return;
     }
 
     public function post_login(String $ticket) {
         $resp = $this->guzzleClient->request('GET',self::IGNITE_URL, [
-            'query'=>[
+            'query' => [
                 'ticket'=>$ticket
+            ],
+            'headers' => [
+                'Referer'=>'https://sso.unpar.ac.id/login?service=https%3A%2F%2Fstudentportal.unpar.ac.id%2FC_home%2Fsso_login',
             ]
         ]);
 
-        return $this->validateLogin();
+        return $resp->getStatusCode() == 302;
     }
 
     public function get_service() : String {
@@ -156,12 +152,15 @@ class StudentPortal extends ServiceBase {
      * Confirming that login is successfull.
      */
     public function validateLogin() : bool {
-        $resp = $this->guzzleClient->request('GET', "/home", [], ["allow_redirects"=>false]);
-
+        $resp = $this->guzzleClient->request('GET', "/home", []);
         return $resp->getHeader("Location")==null;
     }
 
     /**
      * APIS ARE PROVIDED HERE
      */
+    public function getProfile() {
+        $profiler = new Data\Profile($this->guzzleClient, null);
+        return $profiler;
+    }
 }

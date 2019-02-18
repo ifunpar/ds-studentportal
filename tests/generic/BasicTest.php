@@ -3,6 +3,11 @@ use PHPUnit\Framework\TestCase;
 use Chez14\Desso;
 use Chez14\Desso\Services;
 
+use GuzzleHttp\HandlerStack;
+use Namshi\Cuzzle\Middleware\CurlFormatterMiddleware;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 /**
  * @testdox Basic Test
  */
@@ -38,11 +43,11 @@ class BasicTest extends TestCase
      * @testdox Able to perform login.
      */
     public function testFirstStage() {
-        $stupor = new Services\StudentPortal();
+        $stupor = new Services\StudentPortal([
+            'cookie'=>$this->cacheFolder . "/sesi.cookie"
+        ]);
         $client = $this->client;
 
         $this->assertTrue($client->serviceLogin($stupor));
-
-        $stupor->cookieJarSave($this->cacheFolder . "/sesi.cookie");
     }
 }
