@@ -5,7 +5,7 @@ use Chez14\Desso\Client;
 
 class StudentPortal extends ServiceBase {
     const
-        BASE_URL="https://studentportal.unpar.ac.id/",
+        BASE_URL="https://studentportal.unpar.ac.id",
         IGNITE_URL="/C_home/sso_login";
     
     protected
@@ -140,7 +140,6 @@ class StudentPortal extends ServiceBase {
                 'Referer'=>'https://sso.unpar.ac.id/login?service=https%3A%2F%2Fstudentportal.unpar.ac.id%2FC_home%2Fsso_login',
             ]
         ]);
-
         return $resp->getStatusCode() == 302;
     }
 
@@ -161,6 +160,11 @@ class StudentPortal extends ServiceBase {
      */
     public function getProfile() {
         $profiler = new Data\Profile($this->guzzleClient, null);
+        return $profiler;
+    }
+
+    public function getJadwal() {
+        $profiler = new Data\Jadwal($this->guzzleClient, null);
         return $profiler;
     }
 }
