@@ -3,11 +3,6 @@ use PHPUnit\Framework\TestCase;
 use Chez14\Desso;
 use Chez14\Desso\Services;
 
-use GuzzleHttp\HandlerStack;
-use Namshi\Cuzzle\Middleware\CurlFormatterMiddleware;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-
 /**
  * @testdox Basic Test
  */
