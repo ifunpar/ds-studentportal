@@ -140,7 +140,9 @@ class StudentPortal extends ServiceBase {
                 'Referer'=>'https://sso.unpar.ac.id/login?service=https%3A%2F%2Fstudentportal.unpar.ac.id%2FC_home%2Fsso_login',
             ]
         ]);
-        return $resp->getStatusCode() == 302;
+        $validation = $resp->getStatusCode() == 302;
+        $this->guzzleClient->request('GET', $resp->getHeader('Location')[0]);
+        return $validation;
     }
 
     public function get_service() : String {

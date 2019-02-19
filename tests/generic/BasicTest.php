@@ -33,8 +33,8 @@ class BasicTest extends TestCase
 
         $this->client = $client;
 
-        if(is_file($this->cacheFolder . "/seso.cookie")) {
-            unlink($this->cacheFolder . "/seso.cookie");
+        if(is_file($this->cacheFolder . "/sesi.cookie")) {
+            unlink($this->cacheFolder . "/sesi.cookie");
         }
     }
 
@@ -48,5 +48,6 @@ class BasicTest extends TestCase
         $client = $this->client;
 
         $this->assertTrue($client->serviceLogin($stupor));
+        $this->assertTrue($stupor->validateLogin());
     }
 }
