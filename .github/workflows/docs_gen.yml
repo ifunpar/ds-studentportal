@@ -22,7 +22,7 @@ jobs:
         
       - name: Build
         run: |
-          phive install --no-progress --force-accept-unsigned --trust-gpg-keys 8AC0BAA79732DD42 phpDocumentor
+          phive --no-progress install --force-accept-unsigned --trust-gpg-keys 8AC0BAA79732DD42 phpDocumentor
           composer install
           php tools/phpdocumentor
 
