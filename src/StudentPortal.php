@@ -194,19 +194,19 @@ class StudentPortal extends ServiceBase
     /**
      * APIS ARE PROVIDED HERE
      */
-    public function getProfile()
+    public function getProfile(): Data\Profile
     {
-        $profiler = new Data\Profile($this->guzzleClient, null);
+        $profiler = new Data\Profile($this->guzzleClient, []);
         return $profiler;
     }
 
-    public function getJadwal()
+    public function getJadwal(): Data\Jadwal
     {
-        $profiler = new Data\Jadwal($this->guzzleClient, null);
+        $profiler = new Data\Jadwal($this->guzzleClient, []);
         return $profiler;
     }
 
-    public function getNilai()
+    public function getNilai(): Data\Nilai
     {
         $profiler = new Data\Nilai($this->guzzleClient, [
             "tempFolder" => $this->tempFolder
