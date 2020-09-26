@@ -81,9 +81,16 @@ class Profile
         $fetched_html;
 
     /**
-     * NOT FOR PUBLIC, PLEASE STAND BACK!
+     * Create Nilai API Endpoint Consumer.
+     * 
+     * You're not supposed to be initialize this class directly,
+     * you have to use
+     * {@see \Desso\Services\StudentPortal::getNilai() getNilai} method to be
+     * to use this class.
+     * 
+     * @see \Desso\Services\StudentPortal::getNilai()
      */
-    public function __construct($guzzle, $config)
+    public function __construct(\GuzzleHttp\Client $guzzle, array $config)
     {
         $this->guzzleClient = $guzzle;
         $this->config = $config;
