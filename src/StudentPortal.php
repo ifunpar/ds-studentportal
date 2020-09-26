@@ -26,14 +26,18 @@ class StudentPortal extends ServiceBase
      * Create StudentPortal Instance to access Student Portal Programatically.
      * 
      * Supported parameters are:
-     *   - temp-folder (string) Location to put teporary files. Default
-     *     to __DIR__ . '/../tmp'.
+     *   - `temp-folder` (string) Location to put teporary files. Default
+     *     to `__DIR__ . '/../tmp'`.
      * 
-     *   - cookie (string) Location to put cookiejar. You might save this for
-     *     future access so you don't have to relogin while the token still active.
+     *   - `cookie` (string) Location to put cookiejar. You might save this for
+     *     future access so you don't have to relogin while the token still
+     *     active. Default to... Guzzle's default settings.
      *   
-     *   - guzzle (array) Guzzle settings. Please consult to GuzzleHttp's
-     *     documentation for references.
+     *   - `guzzle` (array) Guzzle settings. Please consult to GuzzleHttp's
+     *     documentation for references. 
+     * 
+     * @see http://docs.guzzlephp.org/en/stable/request-options.html GuzzleHttp
+     * Request Options
      *
      * @param array $params Array-based parameters
      */
