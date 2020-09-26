@@ -1,6 +1,6 @@
 <?php
 
-namespace Chez14\Desso\Services\Data;
+namespace Desso\Services\Data;
 
 class Nilai
 {

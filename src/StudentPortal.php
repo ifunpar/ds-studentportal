@@ -1,6 +1,6 @@
 <?php
 
-namespace Chez14\Desso\Services;
+namespace Desso\Services;
 
 use Chez14\Desso\ServiceBase;
 use Chez14\Desso\Client;

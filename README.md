@@ -62,12 +62,12 @@ var_dump($profile);
 
 Tautan kilat:
 - Kelas Student Portal: \
-  https://ifunpar.github.io/ds-studentportal/classes/Chez14.Desso.Services.StudentPortal.html
+  https://ifunpar.github.io/ds-studentportal/classes/Desso.Services.StudentPortal.html
   
 - Daftar API yang disupport oleh library ini: \
-  https://ifunpar.github.io/ds-studentportal/namespaces/Chez14.Desso.Services.Data.html
+  https://ifunpar.github.io/ds-studentportal/namespaces/Desso.Services.Data.html
   
-- https://ifunpar.github.io/ds-studentportal/namespaces/Chez14.Desso.Services.html
+- https://ifunpar.github.io/ds-studentportal/namespaces/Desso.Services.html
 
 
 # Lisensi

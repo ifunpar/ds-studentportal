@@ -17,11 +17,12 @@
     },
     "scripts": {
         "test-dry" : "phpunit --testdox",
-        "test":"composer require phpunit/phpunit && phpunit --testdox"
+        "test":"composer require phpunit/phpunit && phpunit --testdox",
+        "gen:docs": "php tools/phpDocumentor"
     },
     "autoload": {
         "psr-4": {
-            "Chez14\\Desso\\Services\\": "src/"
+            "Desso\\Services\\": "src/"
         }
     }
 }

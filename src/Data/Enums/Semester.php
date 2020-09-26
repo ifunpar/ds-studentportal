@@ -1,6 +1,6 @@
 <?php
 
-namespace Chez14\Desso\Services\Data\Enums;
+namespace Desso\Services\Data\Enums;
 
 class Semester
 {
