@@ -1,12 +1,7 @@
 <?php
-use PHPUnit\Framework\TestCase;
-use Chez14\Desso;
-use Chez14\Desso\Services;
 
-use GuzzleHttp\HandlerStack;
-use Namshi\Cuzzle\Middleware\CurlFormatterMiddleware;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+use PHPUnit\Framework\TestCase;
+use Chez14\Desso\Services;
 
 /**
  * @testdox Fetching Profile
@@ -16,8 +11,9 @@ class FetchProfileTest extends TestCase
     protected $stupor;
     protected $cacheFolder;
     protected $testHandler;
-    
-    protected function setUp() {
+
+    protected function setUp()
+    {
         $this->cacheFolder = realpath(__DIR__ . "/../cache/");
         $this->stupor = new Services\StudentPortal([
             'cookie' => $this->cacheFolder . "/sesi.cookie",
@@ -29,7 +25,8 @@ class FetchProfileTest extends TestCase
     /**
      * @testdox Fetch and Parse Profile
      */
-    public function testGetProfiles() {
+    public function testGetProfiles()
+    {
         $stupor = $this->stupor;
         $jadwal = $stupor->getProfile();
         $this->assertNotNull($jadwal->getDatas());
@@ -39,11 +36,12 @@ class FetchProfileTest extends TestCase
     /**
      * @testdox Fetch and Parse Jadwal
      */
-    public function testGetJadwals() {
+    public function testGetJadwals()
+    {
         $stupor = $this->stupor;
         $jadwal = $stupor->getJadwal();
         $this->assertNotNull($jadwal->getJadwals());
-        if($jadwal->getUASes()) {
+        if ($jadwal->getUASes()) {
             $this->assertNotNull($jadwal->getUTSes());
         }
     }
@@ -51,14 +49,15 @@ class FetchProfileTest extends TestCase
     /**
      * @testdox Fetch and Parse Nilai
      */
-    public function testGetNilais() {
+    public function testGetNilais()
+    {
         $stupor = $this->stupor;
         $jadwal = $stupor->getNilai();
         $this->assertNotNull($jadwal->getNilais());
-        
+
         $semesters = null;
         $this->assertNotNull($semesters = $jadwal->getSemesters());
-        
+
         $this->assertNotNull($jadwal->getNilais($semesters[0]));
     }
 }
