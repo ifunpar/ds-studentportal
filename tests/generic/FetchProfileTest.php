@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Chez14\Desso\Services;
+use Desso\Services;
 
 /**
  * @testdox Fetching Profile
@@ -12,7 +12,7 @@ class FetchProfileTest extends TestCase
     protected $cacheFolder;
     protected $testHandler;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->cacheFolder = realpath(__DIR__ . "/../cache/");
         $this->stupor = new Services\StudentPortal([

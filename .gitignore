@@ -1,6 +1,9 @@
 /vendor/
 composer.lock
-*/.env
+
+.phpunit.*
+**/.env
+
 /tmp/
 /tests/cache/
 

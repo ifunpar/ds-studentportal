@@ -16,13 +16,15 @@
         "guzzlehttp/guzzle": "^6.3"
     },
     "scripts": {
-        "test-dry" : "phpunit --testdox",
-        "test":"composer require phpunit/phpunit && phpunit --testdox",
+        "test":"php tools/phpunit --testdox",
         "gen:docs": "php tools/phpDocumentor"
     },
     "autoload": {
         "psr-4": {
             "Desso\\Services\\": "src/"
         }
+    },
+    "require-dev": {
+        "vlucas/phpdotenv": "^5.2"
     }
 }
