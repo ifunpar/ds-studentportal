@@ -3,3 +3,9 @@ composer.lock
 */.env
 /tmp/
 /tests/cache/
+
+# PHP Docs
+/docs/
+/.phpdoc/
+/tools/
+/.phive/
