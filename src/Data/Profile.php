@@ -1,17 +1,17 @@
 <?php
+
 namespace Chez14\Desso\Services\Data;
-use Chez14\Desso\ServiceBase;
-use Chez14\Desso\Client;
 
 
-class Profile {
+class Profile
+{
     protected
         $guzzleClient,
         $config;
-    
+
     protected
-        $profile_image='/<img src="data:image\/(jpeg|png);base64,([A-Za-z0-9+\/=]+)"/m',
-        $data_name='/<h4 class="my-0".*><b>(.*)<\/b>/mU',
+        $profile_image = '/<img src="data:image\/(jpeg|png);base64,([A-Za-z0-9+\/=]+)"/m',
+        $data_name = '/<h4 class="my-0".*><b>(.*)<\/b>/mU',
         $data_npm = '/<h5 class="my-0"><small>(.*)<\/small>/mU',
         $data_jurusan = '/<h5 class=\'text\.muted my-0\'><small>(.*)<\/small>/mU',
         $data_fakultas = '/<h5 class=\'text\.muted my-0 mb-3\'><small>(.*)<\/small>/mU',
@@ -79,23 +79,25 @@ class Profile {
     private
         $fetched_data,
         $fetched_html;
-    
-     /**
-      * NOT FOR PUBLIC, PLEASE STAND BACK!
-      */
-    public function __construct($guzzle, $config) {
+
+    /**
+     * NOT FOR PUBLIC, PLEASE STAND BACK!
+     */
+    public function __construct($guzzle, $config)
+    {
         $this->guzzleClient = $guzzle;
         $this->config = $config;
 
         $this->fetch();
     }
 
-    public function getProfilePict_base64($refetch = false) {
-        if($this->fetched_data && !$refetch) {
+    public function getProfilePict_base64($refetch = false)
+    {
+        if ($this->fetched_data && !$refetch) {
             return $this->fetched_data;
         }
 
-        if($this->fetched_html == null || $refetch) {
+        if ($this->fetched_html == null || $refetch) {
             $this->fetch();
         }
 
@@ -104,24 +106,25 @@ class Profile {
         return $matched_pict[2][0];
     }
 
-    public function getDatas($refetch = false) {
-        if($this->fetched_data && !$refetch) {
-            return $fetched_data;
+    public function getDatas($refetch = false)
+    {
+        if ($this->fetched_data && !$refetch) {
+            return $this->fetched_data;
         }
 
-        if($this->fetched_html == null || $refetch) {
+        if ($this->fetched_html == null || $refetch) {
             $this->fetch();
         }
 
 
         $datas = [];
-        
+
         /**
          * DATAS
          */
         $matched_datas = [];
         preg_match_all($this->datas, $this->fetched_html, $matched_datas);
-        for($i=0; $i<count($this->datas_pointkey); $i++){
+        for ($i = 0; $i < count($this->datas_pointkey); $i++) {
             $datas[$this->datas_pointkey[$i]] = $matched_datas[1][$i];
         }
 
@@ -183,13 +186,13 @@ class Profile {
         return $datas;
     }
 
-    protected function fetch() {
-        
+    protected function fetch()
+    {
+
         $resp = $this->guzzleClient->request('GET', '/profil', [], [
-            "allow_redirects"=>false
+            "allow_redirects" => false
         ]);
 
         $this->fetched_html = $resp->getBody();
     }
-
 }

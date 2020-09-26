@@ -1,18 +1,18 @@
 <?php
+
 namespace Chez14\Desso\Services\Data;
-use Chez14\Desso\ServiceBase;
-use Chez14\Desso\Client;
 
 
-class Jadwal {
+class Jadwal
+{
     protected
         $guzzleClient,
         $config;
-    
+
     protected
-        $data_jadwals='/<tr>(.*)<\/tr>/sU',
-        $data_tr='/<td.*>(.*)<\/td>/sU',
-        $data_dosen='/<li>(.*)<\/li>/sU';
+        $data_jadwals = '/<tr>(.*)<\/tr>/sU',
+        $data_tr = '/<td.*>(.*)<\/td>/sU',
+        $data_dosen = '/<li>(.*)<\/li>/sU';
 
     protected $datas_jadwal = [
             "day",
@@ -40,40 +40,40 @@ class Jadwal {
     private
         $fetched_data = null,
         $fetched_html = [];
-    
-     /**
-      * NOT FOR PUBLIC, PLEASE STAND BACK!
-      */
-    public function __construct($guzzle, $config) {
+
+    /**
+     * NOT FOR PUBLIC, PLEASE STAND BACK!
+     */
+    public function __construct($guzzle, $config)
+    {
         $this->guzzleClient = $guzzle;
         $this->config = $config;
     }
 
-    public function getJadwals($refetch = false) {
-        if($this->fetched_data && !$refetch) {
-            return $fetched_data;
-        }
-
-        if(!array_key_exists('/jadwal', $this->fetched_html) || 
-            $this->fetched_html['/jadwal'] == null || 
-            $refetch) {
+    public function getJadwals($refetch = false)
+    {
+        if (
+            !array_key_exists('/jadwal', $this->fetched_html) ||
+            $this->fetched_html['/jadwal'] == null ||
+            $refetch
+        ) {
             $this->fetch('/jadwal');
         }
 
         $matched_jadwals = [];
         preg_match_all($this->data_jadwals, $this->fetched_html['/jadwal'], $matched_jadwals);
-        
+
         // var_dump($matched_jadwals);
 
-        $matched_jadwals = array_map(function($data) {
+        $matched_jadwals = array_map(function ($data) {
             $datax = [];
             \preg_match_all($this->data_tr, $data, $datax);
-            
+
             $kambing = [];
-            for($i=0; $i<count($this->datas_jadwal); $i++){
+            for ($i = 0; $i < count($this->datas_jadwal); $i++) {
                 $kambing[$this->datas_jadwal[$i]] = $datax[1][$i];
             }
-            
+
             $lecturers = [];
             \preg_match_all($this->data_dosen, $kambing['lecturers'], $lecturers);
             $kambing['lecturers'] = $lecturers[1];
@@ -90,14 +90,13 @@ class Jadwal {
     }
 
 
-    public function getUTSes($refetch = false) {
-        if($this->fetched_data && !$refetch) {
-            return $fetched_data;
-        }
-
-        if(!array_key_exists('/jadwal/ujian_tengah_semester', $this->fetched_html) || 
-            $this->fetched_html['/jadwal/ujian_tengah_semester'] == null || 
-            $refetch) {
+    public function getUTSes($refetch = false)
+    {
+        if (
+            !array_key_exists('/jadwal/ujian_tengah_semester', $this->fetched_html) ||
+            $this->fetched_html['/jadwal/ujian_tengah_semester'] == null ||
+            $refetch
+        ) {
             $this->fetch('/jadwal/ujian_tengah_semester');
         }
 
@@ -107,12 +106,12 @@ class Jadwal {
         $matched_jadwals = [];
         preg_match_all($this->data_jadwals, $tbody[1][0], $matched_jadwals);
 
-        $matched_jadwals = array_map(function($data) {
+        $matched_jadwals = array_map(function ($data) {
             $datax = [];
             \preg_match_all($this->data_tr, $data, $datax);
 
             $kambing = [];
-            for($i=0; $i<count($this->datas_uts); $i++){
+            for ($i = 0; $i < count($this->datas_uts); $i++) {
                 $kambing[$this->datas_uts[$i]] = $datax[1][$i];
             }
 
@@ -127,14 +126,13 @@ class Jadwal {
         return $matched_jadwals;
     }
 
-    public function getUASes($refetch = false) {
-        if($this->fetched_data && !$refetch) {
-            return $fetched_data;
-        }
-
-        if(!array_key_exists('/jadwal/ujian_akhir_semester', $this->fetched_html) || 
-            $this->fetched_html['/jadwal/ujian_akhir_semester'] == null || 
-            $refetch) {
+    public function getUASes($refetch = false)
+    {
+        if (
+            !array_key_exists('/jadwal/ujian_akhir_semester', $this->fetched_html) ||
+            $this->fetched_html['/jadwal/ujian_akhir_semester'] == null ||
+            $refetch
+        ) {
             $this->fetch('/jadwal/ujian_akhir_semester');
         }
 
@@ -144,12 +142,12 @@ class Jadwal {
         $matched_jadwals = [];
         preg_match_all($this->data_jadwals, $tbody[1][0], $matched_jadwals);
 
-        $matched_jadwals = array_map(function($data) {
+        $matched_jadwals = array_map(function ($data) {
             $datax = [];
             \preg_match_all($this->data_tr, $data, $datax);
 
             $kambing = [];
-            for($i=0; $i<count($this->datas_uts); $i++){
+            for ($i = 0; $i < count($this->datas_uts); $i++) {
                 $kambing[$this->datas_uts[$i]] = $datax[1][$i];
             }
 
@@ -164,15 +162,15 @@ class Jadwal {
         return $matched_jadwals;
     }
 
-    
 
-    protected function fetch($endpoint) {
-        
+
+    protected function fetch($endpoint)
+    {
+
         $resp = $this->guzzleClient->request('GET', $endpoint, [], [
-            "allow_redirects"=>false
+            "allow_redirects" => false
         ]);
 
         $this->fetched_html[$endpoint] = $resp->getBody();
     }
-
 }

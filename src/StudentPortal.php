@@ -1,34 +1,38 @@
 <?php
+
 namespace Chez14\Desso\Services;
+
 use Chez14\Desso\ServiceBase;
 use Chez14\Desso\Client;
 
-class StudentPortal extends ServiceBase {
+class StudentPortal extends ServiceBase
+{
     const
-        BASE_URL="https://studentportal.unpar.ac.id",
-        IGNITE_URL="/C_home/sso_login";
-    
+        BASE_URL = "https://studentportal.unpar.ac.id",
+        IGNITE_URL = "/C_home/sso_login";
+
     protected
         $guzzleClient,
-        $guzzleSetting=[],
+        $guzzleSetting = [],
         $guzzleHandlerStack,
         $cookieJar,
         $cookieFile,
         $tempFolder,
         $useTempCookie = true;
 
-    public function __construct($params = []) {
+    public function __construct($params = [])
+    {
 
         /**
          * Temporary Folder
          */
-        if(\key_exists('temp-folder', $params)){
+        if (\key_exists('temp-folder', $params)) {
             $this->tempFolder = $params['temp-folder'];
         } else {
             $this->tempFolder = __DIR__ . '/../tmp';
         }
-        if(!is_dir($this->tempFolder)){
-            mkdir($this->tempFolder, 0777,true);
+        if (!is_dir($this->tempFolder)) {
+            mkdir($this->tempFolder, 0777, true);
         }
 
 
@@ -36,7 +40,7 @@ class StudentPortal extends ServiceBase {
          * Cookie
          */
         $this->guzzleHandlerStack = \GuzzleHttp\HandlerStack::create();
-        if(key_exists("cookie", $params)) {
+        if (key_exists("cookie", $params)) {
             $this->cookieJarUse($params['cookie'], false);
         } else {
             $this->resetCookie(false);
@@ -55,7 +59,7 @@ class StudentPortal extends ServiceBase {
         /**
          * Guzzle
          */
-        if(key_exists("guzzle", $params)) {
+        if (key_exists("guzzle", $params)) {
             $this->guzzleSetting = array_merge($this->guzzleSetting, $params['guzzle']);
         }
         $this->refreshGuzzle();
@@ -65,13 +69,14 @@ class StudentPortal extends ServiceBase {
     /**
      * Loads cookie Jar/Create them new.
      */
-    public function cookieJarUse($cookiejar, $resetGuzzle=true) {
+    public function cookieJarUse($cookiejar, $resetGuzzle = true)
+    {
         $this->cookieFile = $cookiejar;
         $this->useTempCookie = false;
 
         $this->cookieJar = new \GuzzleHttp\Cookie\FileCookieJar($cookiejar, true);
-        
-        if($resetGuzzle) {
+
+        if ($resetGuzzle) {
             $this->refreshGuzzle();
         }
     }
@@ -79,9 +84,10 @@ class StudentPortal extends ServiceBase {
     /**
      * Save cookie Jar to certain place.
      */
-    public function cookieJarSave($saveTo = null) {
-        if($saveTo == null){
-            if($this->useTempCookie) {
+    public function cookieJarSave($saveTo = null)
+    {
+        if ($saveTo == null) {
+            if ($this->useTempCookie) {
                 throw new \InvalidArgumentException("This time, \$saveTo is not allowed to be null.");
             }
             $saveTo = $this->cookieFile;
@@ -96,13 +102,14 @@ class StudentPortal extends ServiceBase {
      *
      * @param $hardReset Set true untuk menyimpan cookie yang lama.
      */
-    public function resetCookie($resetGuzzle = true){
+    public function resetCookie($resetGuzzle = true)
+    {
         $tmpfname = tempnam($this->tempFolder, "cookie");
         $this->useTempCookie = true;
         $this->cookieFile = $tmpfname;
         $this->cookieJar = new \GuzzleHttp\Cookie\FileCookieJar($tmpfname);
 
-        if($resetGuzzle) {
+        if ($resetGuzzle) {
             $this->refreshGuzzle();
         }
     }
@@ -110,8 +117,9 @@ class StudentPortal extends ServiceBase {
     /**
      * Auto delete some temps.
      */
-    public function __destruct() {
-        if($this->useTempCookie)
+    public function __destruct()
+    {
+        if ($this->useTempCookie)
             unlink($this->cookieFile);
     }
 
@@ -119,25 +127,28 @@ class StudentPortal extends ServiceBase {
      * Refresh the Guzzle instance, just in case if you made a changes in cookie
      * or settings.
      */
-    protected function refreshGuzzle() {
+    protected function refreshGuzzle()
+    {
         $this->guzzleClient = new \GuzzleHttp\Client($this->guzzleSetting);
     }
 
 
 
-    public function pre_login(){
+    public function pre_login()
+    {
         $resp = $this->guzzleClient->request('GET', "/");
         $this->guzzleClient->request('GET', self::IGNITE_URL);
         return;
     }
 
-    public function post_login(String $ticket) {
-        $resp = $this->guzzleClient->request('GET',self::IGNITE_URL, [
+    public function post_login(String $ticket)
+    {
+        $resp = $this->guzzleClient->request('GET', self::IGNITE_URL, [
             'query' => [
-                'ticket'=>$ticket
+                'ticket' => $ticket
             ],
             'headers' => [
-                'Referer'=>'https://sso.unpar.ac.id/login?service=https%3A%2F%2Fstudentportal.unpar.ac.id%2FC_home%2Fsso_login',
+                'Referer' => 'https://sso.unpar.ac.id/login?service=https%3A%2F%2Fstudentportal.unpar.ac.id%2FC_home%2Fsso_login',
             ]
         ]);
         $validation = $resp->getStatusCode() == 302;
@@ -145,32 +156,37 @@ class StudentPortal extends ServiceBase {
         return $validation;
     }
 
-    public function get_service() : String {
+    public function get_service(): String
+    {
         return self::BASE_URL . self::IGNITE_URL;
     }
 
     /**
      * Confirming that login is successfull.
      */
-    public function validateLogin() : bool {
+    public function validateLogin(): bool
+    {
         $resp = $this->guzzleClient->request('GET', "/home", []);
-        return $resp->getHeader("Location")==null;
+        return $resp->getHeader("Location") == null;
     }
 
     /**
      * APIS ARE PROVIDED HERE
      */
-    public function getProfile() {
+    public function getProfile()
+    {
         $profiler = new Data\Profile($this->guzzleClient, null);
         return $profiler;
     }
 
-    public function getJadwal() {
+    public function getJadwal()
+    {
         $profiler = new Data\Jadwal($this->guzzleClient, null);
         return $profiler;
     }
 
-    public function getNilai() {
+    public function getNilai()
+    {
         $profiler = new Data\Nilai($this->guzzleClient, [
             "tempFolder" => $this->tempFolder
         ]);
