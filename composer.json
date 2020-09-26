@@ -1,6 +1,7 @@
 {
-    "name": "chez14/ds-stupor",
+    "name": "chez14/ds-studentportal",
     "description": "Student Portal Wrapper for PHP",
+    "homepage": "https://github.com/ifunpar/ds-studentportal",
     "type": "library",
     "license": "MIT",
     "authors": [
