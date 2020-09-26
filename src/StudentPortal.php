@@ -20,6 +20,23 @@ class StudentPortal extends ServiceBase
         $tempFolder,
         $useTempCookie = true;
 
+    /**
+     * Create StudentPortal Instance
+     * 
+     * Create StudentPortal Instance to access Student Portal Programatically.
+     * 
+     * Supported parameters are:
+     *   - temp-folder (string) Location to put teporary files. Default
+     *     to __DIR__ . '/../tmp'.
+     * 
+     *   - cookie (string) Location to put cookiejar. You might save this for
+     *     future access so you don't have to relogin while the token still active.
+     *   
+     *   - guzzle (array) Guzzle settings. Please consult to GuzzleHttp's
+     *     documentation for references.
+     *
+     * @param array $params Array-based parameters
+     */
     public function __construct($params = [])
     {
 
