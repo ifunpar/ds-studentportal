@@ -12,3 +12,6 @@ composer.lock
 /.phpdoc/
 /tools/
 /.phive/
+
+# Editor config
+.vscode/

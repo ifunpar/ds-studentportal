@@ -53,15 +53,15 @@ class Jadwal
     public function getJadwals($refetch = false)
     {
         if (
-            !array_key_exists('/jadwal', $this->fetched_html) ||
-            $this->fetched_html['/jadwal'] == null ||
+            !array_key_exists('/jadwal/kuliah', $this->fetched_html) ||
+            $this->fetched_html['/jadwal/kuliah'] == null ||
             $refetch
         ) {
-            $this->fetch('/jadwal');
+            $this->fetch('/jadwal/kuliah');
         }
 
         $matched_jadwals = [];
-        preg_match_all($this->data_jadwals, $this->fetched_html['/jadwal'], $matched_jadwals);
+        preg_match_all($this->data_jadwals, $this->fetched_html['/jadwal/kuliah'], $matched_jadwals);
 
         // var_dump($matched_jadwals);
 

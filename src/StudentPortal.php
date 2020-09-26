@@ -184,7 +184,7 @@ class StudentPortal extends ServiceBase
     public function validateLogin(): bool
     {
         $resp = $this->guzzleClient->request('GET', "/home", []);
-        return $resp->getHeader("Location") == null;
+        return $resp->getStatusCode() == 200;
     }
 
     /**
