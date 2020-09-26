@@ -1,12 +1,12 @@
 {
     "name": "chez14/ds-stupor",
-    "description": "Stupor DSSO",
+    "description": "Student Portal Wrapper for PHP",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Chris",
-            "email": "iam@christianto.net"
+            "name": "Chris Qiang",
+            "email": "chris@christianto.net"
         }
     ],
     "minimum-stability": "beta",
