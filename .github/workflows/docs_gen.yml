@@ -22,9 +22,9 @@ jobs:
         
       - name: Build
         run: |
-          phive --no-progress install --force-accept-unsigned --trust-gpg-keys 8AC0BAA79732DD42 phpDocumentor
-          composer install
-          php tools/phpDocumentor
+          phive --no-progress install --force-accept-unsigned --trust-gpg-keys 8AC0BAA79732DD42 phpDocumentor@2
+          composer install --no-progress
+          php tools/phpdocumentor
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.1
