@@ -58,7 +58,7 @@ var_dump($profile);
 
 # Methods, Functions & Classes
 
-**Dokumentasi daftar method, fungsi dan kelas dapat dilihat pada alamat berikut:** (doc url menyusul)
+**Dokumentasi daftar method, fungsi dan kelas dapat dilihat pada alamat berikut:** [http://ifunpar.github.io/ds-studentportal](http://ifunpar.github.io/ds-studentportal).
 
 # Lisensi
 
