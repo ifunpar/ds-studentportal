@@ -88,7 +88,9 @@ class StudentPortal extends ServiceBase
 
 
     /**
-     * Loads cookie Jar/Create them new.
+     * Use the CookieJar from file.
+     * 
+     * Will auto create file when not exist.
      *
      * @param $cookiejar
      * @param bool $resetGuzzle
@@ -108,9 +110,9 @@ class StudentPortal extends ServiceBase
     }
 
     /**
-     * Save cookie Jar to certain place.
+     * Save CookieJar to defined file path.
      *
-     * @param null $saveTo File to save cookie jar to
+     * @param null $saveTo File name to save cookie jar to
      *
      * @throws \InvalidArgumentException
      *
@@ -128,9 +130,7 @@ class StudentPortal extends ServiceBase
     }
 
     /**
-     * Gunakan ini untuk membersihkan cookie yang barusan anda load.
-     * Method ini akan membuat CookieJar baru. Dan yang lama tidak akan
-     * terpengaruh.
+     * Clean the cookies by creating new CookieJar. The old CookieJar wont be touched.
      *
      * @param bool $resetGuzzle
      *
@@ -169,7 +169,9 @@ class StudentPortal extends ServiceBase
     }
 
     /**
-     * Pre Login
+     * Pre-Login
+     * 
+     * This will initialize the Student Portal session and cookies.
      *
      * @return void
      */
@@ -182,9 +184,12 @@ class StudentPortal extends ServiceBase
 
     /**
      * Post Login
+     * 
+     * This will trigger the Student Portal to consume the ticket issued by the
+     * Desso Service.
      *
      * @param String $ticket
-     * @return bool
+     * @return bool Ticket consume status.
      */
     public function post_login(String $ticket): bool
     {
