@@ -88,9 +88,16 @@ class StudentPortal extends ServiceBase
 
 
     /**
-     * Loads cookie Jar/Create them new.
+     * Use the CookieJar from file.
+     * 
+     * Will auto create file when not exist.
+     *
+     * @param $cookiejar
+     * @param bool $resetGuzzle
+     *
+     * @return void
      */
-    public function cookieJarUse($cookiejar, $resetGuzzle = true)
+    public function cookieJarUse($cookiejar, $resetGuzzle = true): void
     {
         $this->cookieFile = $cookiejar;
         $this->useTempCookie = false;
@@ -103,9 +110,15 @@ class StudentPortal extends ServiceBase
     }
 
     /**
-     * Save cookie Jar to certain place.
+     * Save CookieJar to defined file path.
+     *
+     * @param null $saveTo File name to save cookie jar to
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return void
      */
-    public function cookieJarSave($saveTo = null)
+    public function cookieJarSave($saveTo = null): void
     {
         if ($saveTo == null) {
             if ($this->useTempCookie) {
@@ -117,13 +130,13 @@ class StudentPortal extends ServiceBase
     }
 
     /**
-     * Gunakan ini untuk membersihkan cookie yang barusan anda load.
-     * Method ini akan membuat CookieJar baru. Dan yang lama tidak akan
-     * terpengaruh.
+     * Clean the cookies by creating new CookieJar. The old CookieJar wont be touched.
      *
-     * @param $hardReset Set true untuk menyimpan cookie yang lama.
+     * @param bool $resetGuzzle
+     *
+     * @return void
      */
-    public function resetCookie($resetGuzzle = true)
+    public function resetCookie($resetGuzzle = true): void
     {
         $tmpfname = tempnam($this->tempFolder, "cookie");
         $this->useTempCookie = true;
@@ -147,22 +160,38 @@ class StudentPortal extends ServiceBase
     /**
      * Refresh the Guzzle instance, just in case if you made a changes in cookie
      * or settings.
+     *
+     * @return void
      */
-    protected function refreshGuzzle()
+    protected function refreshGuzzle(): void
     {
         $this->guzzleClient = new \GuzzleHttp\Client($this->guzzleSetting);
     }
 
-
-
-    public function pre_login()
+    /**
+     * Pre-Login
+     * 
+     * This will initialize the Student Portal session and cookies.
+     *
+     * @return void
+     */
+    public function pre_login(): void
     {
         $resp = $this->guzzleClient->request('GET', "/");
         $this->guzzleClient->request('GET', self::IGNITE_URL);
         return;
     }
 
-    public function post_login(String $ticket)
+    /**
+     * Post Login
+     * 
+     * This will trigger the Student Portal to consume the ticket issued by the
+     * Desso Service.
+     *
+     * @param String $ticket
+     * @return bool Ticket consume status.
+     */
+    public function post_login(String $ticket): bool
     {
         $resp = $this->guzzleClient->request('GET', self::IGNITE_URL, [
             'query' => [
@@ -177,6 +206,11 @@ class StudentPortal extends ServiceBase
         return $validation;
     }
 
+    /**
+     * Get the service url
+     *
+     * @return String
+     */
     public function get_service(): String
     {
         return self::BASE_URL . self::IGNITE_URL;
@@ -184,6 +218,8 @@ class StudentPortal extends ServiceBase
 
     /**
      * Confirming that login is successfull.
+     *
+     * @return bool
      */
     public function validateLogin(): bool
     {
@@ -194,18 +230,34 @@ class StudentPortal extends ServiceBase
     /**
      * APIS ARE PROVIDED HERE
      */
+
+    /**
+     * Get Profile APIS
+     *
+     * @return Data\Profile
+     */
     public function getProfile(): Data\Profile
     {
         $profiler = new Data\Profile($this->guzzleClient, []);
         return $profiler;
     }
 
+    /**
+     * Get Jadwal APIS
+     *
+     * @return Data\Jadwal
+     */
     public function getJadwal(): Data\Jadwal
     {
         $profiler = new Data\Jadwal($this->guzzleClient, []);
         return $profiler;
     }
 
+    /**
+     * Get Nilai APIS
+     *
+     * @return Data\Nilai
+     */
     public function getNilai(): Data\Nilai
     {
         $profiler = new Data\Nilai($this->guzzleClient, [
