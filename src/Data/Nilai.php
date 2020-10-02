@@ -32,7 +32,12 @@ class Nilai
         $this->config = $config;
     }
 
-    public function getNilais(Enums\Semester $semester = null, $refetch = false)
+    /**
+     * @param Enums\Semester|null $semester
+     * @param false $refetch
+     * @return array
+     */
+    public function getNilais(Enums\Semester $semester = null, $refetch = false): array
     {
         $endpoint = "/nilai";
         if ($semester != null) {
@@ -64,9 +69,11 @@ class Nilai
     }
 
     /**
-     * Get all avaialble semesters
+     * Get all available semesters
+     * @param false $refetch
+     * @return array
      */
-    public function getSemesters($refetch = false)
+    public function getSemesters($refetch = false): array
     {
         $this->autorefetch('/nilai', $refetch);
 
@@ -79,6 +86,11 @@ class Nilai
         return Enums\Semester::createFromPreg($semester_data);
     }
 
+    /**
+     * @param $endpoint
+     * @param $refetch
+     * @return mixed
+     */
     protected function autorefetch($endpoint, $refetch)
     {
         if (
@@ -98,7 +110,11 @@ class Nilai
         }
     }
 
-    protected function fetch($endpoint)
+    /**
+     * @param $endpoint
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    protected function fetch($endpoint) : void
     {
 
         $resp = $this->guzzleClient->request('GET', $endpoint, [], [
