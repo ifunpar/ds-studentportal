@@ -98,6 +98,10 @@ class Profile
         $this->fetch();
     }
 
+    /**
+     * @param false $refetch
+     * @return mixed
+     */
     public function getProfilePict_base64($refetch = false)
     {
         if ($this->fetched_data && !$refetch) {
@@ -113,7 +117,11 @@ class Profile
         return $matched_pict[2][0];
     }
 
-    public function getDatas($refetch = false)
+    /**
+     * @param false $refetch
+     * @return array
+     */
+    public function getDatas($refetch = false) : array
     {
         if ($this->fetched_data && !$refetch) {
             return $this->fetched_data;
@@ -193,6 +201,9 @@ class Profile
         return $datas;
     }
 
+    /**
+     * @return void
+     */
     protected function fetch()
     {
 
