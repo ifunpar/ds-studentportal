@@ -74,17 +74,6 @@
   <file name="StudentPortal.php">
     <error line="0" severity="error" message="No summary was found for this file" source="phpDocumentor.file.PPC:ERR-50000"/>
     <error line="8" severity="error" message="No summary for class \Desso\Services\StudentPortal" source="phpDocumentor.file.PPC:ERR-50005"/>
-    <error line="93" severity="error" message="Argument $cookiejar is missing from the Docblock of cookieJarUse" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="93" severity="error" message="Argument $resetGuzzle is missing from the Docblock of cookieJarUse" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="108" severity="error" message="Argument $saveTo is missing from the Docblock of cookieJarSave" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="126" severity="error" message="Name of argument $resetGuzzle does not match with the DocBlock's name $hardReset in resetCookie()" source="phpDocumentor.file.PPC:ERR-50014"/>
-    <error line="126" severity="notice" message="Parameter $hardReset could not be found in resetCookie()" source="phpDocumentor.file.PPC:ERR-50013"/>
-    <error line="158" severity="error" message="No summary for method pre_login()" source="phpDocumentor.file.PPC:ERR-50008"/>
-    <error line="165" severity="error" message="Argument $ticket is missing from the Docblock of post_login" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="165" severity="error" message="No summary for method post_login()" source="phpDocumentor.file.PPC:ERR-50008"/>
-    <error line="180" severity="error" message="No summary for method get_service()" source="phpDocumentor.file.PPC:ERR-50008"/>
-    <error line="203" severity="error" message="No summary for method getJadwal()" source="phpDocumentor.file.PPC:ERR-50008"/>
-    <error line="209" severity="error" message="No summary for method getNilai()" source="phpDocumentor.file.PPC:ERR-50008"/>
     <error line="15" severity="error" message="No summary for property $guzzleClient" source="phpDocumentor.file.PPC:ERR-50007"/>
     <error line="16" severity="error" message="No summary for property $guzzleSetting" source="phpDocumentor.file.PPC:ERR-50007"/>
     <error line="17" severity="error" message="No summary for property $guzzleHandlerStack" source="phpDocumentor.file.PPC:ERR-50007"/>
