@@ -33,6 +33,9 @@ class Nilai
     }
 
     /**
+     * Gets the entire grades for an entire semester
+     * if a semster is provided you get the grades for
+     * the specific semester
      * @param Enums\Semester|null $semester
      * @param false $refetch
      * @return array
@@ -87,6 +90,7 @@ class Nilai
     }
 
     /**
+     * Conditional refetching of data from specific endpoint
      * @param $endpoint
      * @param $refetch
      * @return mixed
@@ -111,6 +115,7 @@ class Nilai
     }
 
     /**
+     * Fetches data from a given HTTP endpoint
      * @param $endpoint
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
