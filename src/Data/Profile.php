@@ -99,10 +99,11 @@ class Profile
     }
 
     /**
+     * Gets the profile picture of a specific user it will be returned as base64 string
      * @param false $refetch
-     * @return mixed
+     * @return string
      */
-    public function getProfilePict_base64($refetch = false)
+    public function getProfilePict_base64($refetch = false) : string
     {
         if ($this->fetched_data && !$refetch) {
             return $this->fetched_data;
@@ -118,6 +119,7 @@ class Profile
     }
 
     /**
+     * Returns personal information of the used profile.
      * @param false $refetch
      * @return array
      */
@@ -202,6 +204,7 @@ class Profile
     }
 
     /**
+     * Fetches data from the profile API Endpoint
      * @return void
      */
     protected function fetch()
