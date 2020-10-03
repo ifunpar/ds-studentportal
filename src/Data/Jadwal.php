@@ -58,6 +58,7 @@ class Jadwal
     }
 
     /**
+     * Returns a schedule for the semester
      * @param false $refetch
      * @return array[]
      */
@@ -102,6 +103,7 @@ class Jadwal
 
 
     /**
+     * Returns the Ujian Tengah Semester (Midterm Exams)
      * @param false $refetch
      * @return array[]
      */
@@ -142,6 +144,7 @@ class Jadwal
     }
 
     /**
+     * Returns the Ujian Akhir Semester (Final Exams)
      * @param false $refetch
      * @return array[]
      */
@@ -183,6 +186,7 @@ class Jadwal
 
 
     /**
+     * Fetches data from a given endpoint.
      * @param $endpoint
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
