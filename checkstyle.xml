@@ -5,14 +5,6 @@
     <error line="6" severity="error" message="No summary for class \Desso\Services\Data\Jadwal" source="phpDocumentor.file.PPC:ERR-50005"/>
     <error line="54" severity="error" message="Argument $guzzle is missing from the Docblock of __construct" source="phpDocumentor.file.PPC:ERR-50015"/>
     <error line="54" severity="error" message="Argument $config is missing from the Docblock of __construct" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="60" severity="error" message="Argument $refetch is missing from the Docblock of getJadwals" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="60" severity="error" message="No summary for method getJadwals()" source="phpDocumentor.file.PPC:ERR-50008"/>
-    <error line="100" severity="error" message="Argument $refetch is missing from the Docblock of getUTSes" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="100" severity="error" message="No summary for method getUTSes()" source="phpDocumentor.file.PPC:ERR-50008"/>
-    <error line="136" severity="error" message="Argument $refetch is missing from the Docblock of getUASes" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="136" severity="error" message="No summary for method getUASes()" source="phpDocumentor.file.PPC:ERR-50008"/>
-    <error line="174" severity="error" message="Argument $endpoint is missing from the Docblock of fetch" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="174" severity="error" message="No summary for method fetch()" source="phpDocumentor.file.PPC:ERR-50008"/>
     <error line="9" severity="error" message="No summary for property $guzzleClient" source="phpDocumentor.file.PPC:ERR-50007"/>
     <error line="10" severity="error" message="No summary for property $config" source="phpDocumentor.file.PPC:ERR-50007"/>
     <error line="13" severity="error" message="No summary for property $data_jadwals" source="phpDocumentor.file.PPC:ERR-50007"/>
@@ -28,15 +20,6 @@
     <error line="5" severity="error" message="No summary for class \Desso\Services\Data\Nilai" source="phpDocumentor.file.PPC:ERR-50005"/>
     <error line="29" severity="error" message="Argument $guzzle is missing from the Docblock of __construct" source="phpDocumentor.file.PPC:ERR-50015"/>
     <error line="29" severity="error" message="Argument $config is missing from the Docblock of __construct" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="35" severity="error" message="Argument $semester is missing from the Docblock of getNilais" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="35" severity="error" message="Argument $refetch is missing from the Docblock of getNilais" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="35" severity="error" message="No summary for method getNilais()" source="phpDocumentor.file.PPC:ERR-50008"/>
-    <error line="69" severity="error" message="Argument $refetch is missing from the Docblock of getSemesters" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="82" severity="error" message="Argument $endpoint is missing from the Docblock of autorefetch" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="82" severity="error" message="Argument $refetch is missing from the Docblock of autorefetch" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="82" severity="error" message="No summary for method autorefetch()" source="phpDocumentor.file.PPC:ERR-50008"/>
-    <error line="101" severity="error" message="Argument $endpoint is missing from the Docblock of fetch" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="101" severity="error" message="No summary for method fetch()" source="phpDocumentor.file.PPC:ERR-50008"/>
     <error line="8" severity="error" message="No summary for property $guzzleClient" source="phpDocumentor.file.PPC:ERR-50007"/>
     <error line="9" severity="error" message="No summary for property $config" source="phpDocumentor.file.PPC:ERR-50007"/>
     <error line="12" severity="error" message="No summary for property $data_nilai" source="phpDocumentor.file.PPC:ERR-50007"/>
@@ -54,11 +37,6 @@
     <error line="6" severity="error" message="No summary for class \Desso\Services\Data\Profile" source="phpDocumentor.file.PPC:ERR-50005"/>
     <error line="93" severity="error" message="Argument $guzzle is missing from the Docblock of __construct" source="phpDocumentor.file.PPC:ERR-50015"/>
     <error line="93" severity="error" message="Argument $config is missing from the Docblock of __construct" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="101" severity="error" message="Argument $refetch is missing from the Docblock of getProfilePict_base64" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="101" severity="error" message="No summary for method getProfilePict_base64()" source="phpDocumentor.file.PPC:ERR-50008"/>
-    <error line="116" severity="error" message="Argument $refetch is missing from the Docblock of getDatas" source="phpDocumentor.file.PPC:ERR-50015"/>
-    <error line="116" severity="error" message="No summary for method getDatas()" source="phpDocumentor.file.PPC:ERR-50008"/>
-    <error line="196" severity="error" message="No summary for method fetch()" source="phpDocumentor.file.PPC:ERR-50008"/>
     <error line="9" severity="error" message="No summary for property $guzzleClient" source="phpDocumentor.file.PPC:ERR-50007"/>
     <error line="10" severity="error" message="No summary for property $config" source="phpDocumentor.file.PPC:ERR-50007"/>
     <error line="13" severity="error" message="No summary for property $profile_image" source="phpDocumentor.file.PPC:ERR-50007"/>
