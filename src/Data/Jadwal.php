@@ -57,7 +57,12 @@ class Jadwal
         $this->config = $config;
     }
 
-    public function getJadwals($refetch = false)
+    /**
+     * Returns a schedule for the semester
+     * @param false $refetch
+     * @return array[]
+     */
+    public function getJadwals($refetch = false) : array
     {
         if (
             !array_key_exists('/jadwal/kuliah', $this->fetched_html) ||
@@ -97,7 +102,12 @@ class Jadwal
     }
 
 
-    public function getUTSes($refetch = false)
+    /**
+     * Returns the Ujian Tengah Semester (Midterm Exams)
+     * @param false $refetch
+     * @return array[]
+     */
+    public function getUTSes($refetch = false) : array
     {
         if (
             !array_key_exists('/jadwal/ujian_tengah_semester', $this->fetched_html) ||
@@ -133,7 +143,12 @@ class Jadwal
         return $matched_jadwals;
     }
 
-    public function getUASes($refetch = false)
+    /**
+     * Returns the Ujian Akhir Semester (Final Exams)
+     * @param false $refetch
+     * @return array[]
+     */
+    public function getUASes($refetch = false): array
     {
         if (
             !array_key_exists('/jadwal/ujian_akhir_semester', $this->fetched_html) ||
@@ -170,8 +185,12 @@ class Jadwal
     }
 
 
-
-    protected function fetch($endpoint)
+    /**
+     * Fetches data from a given endpoint.
+     * @param $endpoint
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    protected function fetch($endpoint) : void
     {
 
         $resp = $this->guzzleClient->request('GET', $endpoint, [], [
